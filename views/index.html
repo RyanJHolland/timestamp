@@ -1,0 +1,71 @@
+  <!DOCTYPE html>
+  <html>
+
+     <head>
+        <title>Timestamp Microservice</title>
+        <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+        <link href="/public/style.css" rel="stylesheet" type="text/css">
+        <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+     </head>
+
+     <body>
+        <div class="container">
+           <!-- <h1>Manage Node.js projects and npm packages using package.json</h1> -->
+           <!-- <h3>Part 1 of Free Code Camp Backend Challenges</h3> -->
+          <h2>
+  Timestamp Microservice
+          </h2>
+          <h3>
+
+                      by Ryan Holland
+          </h3>
+            based on <a href="https://www.freecodecamp.org/challenges/timestamp-microservice">this challenge</a>
+        </div>
+
+       <div>
+         <form>
+           <h3>
+             
+           Enter a Unix timestamp or a date:
+           </h3>
+           <input type="text" name="input" id="input">
+           <button id="submitButton">Submit</button>
+         </form>
+       </div>
+       <br><br>
+       <h3>
+       <div class="form_output">
+         
+       </div>
+       </h3>
+       <script>
+         
+         $(document).ready(function () {
+            var input;
+            $('#submitButton').click(function(e) {
+              e.preventDefault();
+              input = $('#input').val();
+              if ( input.length > 0 ) {
+                $.ajax({
+                    url : input,
+                    type: "GET",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                      console.log(data.nat);
+                      $(".form_output").html("Unix timestamp: <br>" + data.unix + "<br><br>Natural language: <br>  " + data.nat);
+                    },
+                    error: function (jXHR, textStatus, errorThrown) {
+                      $(".form_output").html("Unix timestamp: <br>null<br><br>Natural language: <br> null");
+                      }
+                });
+              }
+          });
+});
+         
+       </script>
+     </body>
+</html>
